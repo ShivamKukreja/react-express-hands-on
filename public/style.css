@@ -1,0 +1,33 @@
+body{
+    font-family: 'Roboto', serif;
+}
+ul li{
+    margin:1px;
+    display: inline-block;
+
+    background-color: #eeeeee;
+
+
+}
+li a{
+    display: inline-block;
+    padding:5px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+li a.selected{
+
+    font-weight: bold;
+    background-color: darkcyan;
+    color: white;
+}
+.card {
+    display: inline-block;
+    padding: 15px;
+}
+.txt-search-box {
+    padding: 5px;
+}
+.search-wrapper {
+    margin-bottom: 30px;
+}
