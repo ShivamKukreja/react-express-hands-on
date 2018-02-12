@@ -23,7 +23,7 @@ export default class ProductSearch extends Component {
         return (
             <div className = "search-wrapper">
                 <input className="txt-search-box" type = "text" value = {this.state.keyword}
-                placeholder = "Search ..."
+                placeholder = "Search by name "
                 onChange = { (event) => this.onUserInput(event) } />
                 <button className="btn btn-primary col-sm-offset-1" value = "Search" onClick = { (event) => this.handleSearch(event) }>Search</button>
             </div>
