@@ -1,28 +1,35 @@
 import React, { Component, Fragment } from 'react';
 import ProductCard from '../components/ProductCard';
 import ProductSearch from '../components/ProductSearch';
+import { connect } from 'react-redux';
+import ProductActions from '../actions/ProductAction';
 
-export default class PLP extends Component {
+class PLP extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            products: [],
+            //products: [],
             keyword: ""
         }
         this.handleSearch = this.handleSearch.bind(this);
     }
 
     componentDidMount() {
-        fetch('products.json').then(data => {
+        /* fetch('products.json').then(data => {
             return data.json();
         }).then(response => {
+            this.props.dispatch({
+                type: "GET_PRODUCTS",
+                payload: response
+            });
             this.setState({
                 products: response.products
             });
         }).catch(error => {
             console.log(error);
-        })
+        }) */
+        this.props.dispatch(ProductActions.getAllProducts());
     }
 
     handleSearch(key) { 
@@ -32,7 +39,7 @@ export default class PLP extends Component {
     };
 
     createProductCards() {
-        let products = this.state.products,
+        let products = this.props.products,
             keyword = this.state.keyword;
 
         if(keyword) {
@@ -66,3 +73,17 @@ export default class PLP extends Component {
         
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PLP);
