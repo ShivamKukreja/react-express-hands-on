@@ -3,15 +3,16 @@ import ProductCard from '../components/ProductCard';
 import ProductSearch from '../components/ProductSearch';
 import { connect } from 'react-redux';
 import ProductActions from '../actions/ProductAction';
+import ProductFindSelector from '../selectors/ProductFindSelector';
 
 class PLP extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+        /* this.state = {
             //products: [],
             keyword: ""
-        }
+        } */
         this.handleSearch = this.handleSearch.bind(this);
     }
 
@@ -33,20 +34,21 @@ class PLP extends Component {
     }
 
     handleSearch(key) { 
-        this.setState({
+        /* this.setState({
             keyword: key
-        });
+        }); */
+        this.props.dispatch(ProductActions.findProducts(key));
     };
 
     createProductCards() {
-        let products = this.props.products,
-            keyword = this.state.keyword;
+        let products = this.props.products;/* ,
+            keyword = this.props.keyword; */
 
-        if(keyword) {
+        /* if(keyword) {
             products = products.filter((product) => {
                 return (keyword === product.name);
             });
-        }
+        } */
         let productCards = products.map((product, index) => {
             return <ProductCard key={index} product={product} />
         });
@@ -75,8 +77,15 @@ class PLP extends Component {
 }
 
 const mapStateToProps = (state) => {
+    /* let productSet = [...state.products],
+        keyword = state.keyword;
+    if (keyword) {
+        productSet = productSet.filter(product => {
+            return (product.name.indexOf(keyword) >= 0);
+        });        
+    } */
     return {
-        products: state.products
+        products: ProductFindSelector(state)
     }
 }
 
